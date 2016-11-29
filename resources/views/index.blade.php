@@ -18,6 +18,7 @@
   <script src="{{asset('/node_modules/cropbox.js')}}"></script>
   <script src="{{asset('/node_modules/uploadify/jquery.uploadify.js')}}"></script>
   <script src="{{asset('/node_modules/angular/angular.js')}}"></script>
+  <script src="{{asset('/node_modules/angular-file-upload/dist/angular-file-upload.js')}}"></script>
   <script src="{{asset('/node_modules/angular-ui-router/release/angular-ui-router.js')}}"></script>
   <script src="{{ asset('/node_modules/kindeditor/kindeditor.js') }}"></script>
   <script src="{{ asset('/node_modules/layer/layer.js') }}"></script>
@@ -25,6 +26,7 @@
   <script src="{{asset('/js/base.js')}}"></script>
   <script src="{{asset('/js/user.js')}}"></script>
   <script src="{{asset('/js/video.js')}}"></script>
+  <script src="{{asset('/js/home.js')}}"></script>
 </head>
 <body>
 {{--头部--}}

@@ -7,11 +7,20 @@ function create_code(){
 function user_ins(){
   return  new App\User;
 };
+function fam_ins(){
+  return  new App\Family;
+};
 function video_ins(){
   return  new App\Video;
 };
 function book_ins(){
   return  new App\Book;
+};
+function tea_ins(){
+  return  new App\Tea;
+};
+function res_ins(){
+  return  new App\Resources;
 };
 function comment_ins(){
   return  new App\Comment;
@@ -87,6 +96,32 @@ Route::group(['middleware' => ['web']], function () {
   Route::any('api/book/remove',function(){
     return book_ins()->remove();
   });
+  //茶会api
+  Route::any('api/tea/add',function(){
+    return tea_ins()->add();
+  });
+  Route::any('api/tea/change',function(){
+    return tea_ins()->change();
+  });
+  Route::any('api/tea/read',function(){
+    return tea_ins()->read();
+  });
+  Route::any('api/tea/remove',function(){
+    return tea_ins()->remove();
+  });
+  //资源api
+  Route::any('api/res/add',function(){
+    return res_ins()->add();
+  });
+  Route::any('api/res/change',function(){
+    return res_ins()->change();
+  });
+  Route::any('api/res/read',function(){
+    return res_ins()->read();
+  });
+  Route::any('api/res/remove',function(){
+    return res_ins()->remove();
+  });
 
   //评论
   Route::any('api/comment/add',function(){
@@ -141,4 +176,9 @@ Route::group(['middleware' => ['web']], function () {
    * 公用上传七牛图片类
    */
   Route::any('api/upload/image','CommonController@image');
+
+  /**
+   * home显示数据
+   */
+  Route::any('data/home/data','HomeController@data');
 });

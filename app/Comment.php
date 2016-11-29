@@ -17,19 +17,27 @@ class Comment extends Model
       return err('empty content');
 
     if (
-      (!rq('video_id') && !rq('book_id')) || //none
-      (rq('video_id') && rq('book_id')) // all
+      (!rq('video_id') && !rq('book_id') && !rq('tea_id') && !rq('res_id') ) || //none
+      (rq('video_id') && rq('book_id') && rq('tea_id') && rq('res_id')) // all
     )
-      return err('video_id or book_id is required');
+      return err('tea_id or or res_id or video_id or book_id is required');
 
     if (rq('video_id')){
       $video = video_ins()->find(rq('video_id'));
       if (!$video) return err('video_id is not exists');
       $this->video_id = rq('video_id');
-    }else{
+    }else if (rq('book_id')){
       $book = book_ins()->find(rq('book_id'));
       if (!$book) return err('book_id is not exists');
       $this->book_id = rq('book_id');
+    }else if (rq('tea_id')){
+      $tea = tea_ins()->find(rq('tea_id'));
+      if (!$tea) return err('tea_id is not exists');
+      $this->tea_id = rq('tea_id');
+    }else{
+      $res = res_ins()->find(rq('res_id'));
+      if (!$res) return err('resource is not exists');
+      $this->res_id = rq('res_id');
     }
 
     if (rq('reply_to')){
@@ -54,17 +62,25 @@ class Comment extends Model
    */
   public function read(){
 
-    if (!rq('video_id') && !rq('book_id'))
-      return err('video_id or book_id is required');
+    if (!rq('video_id') && !rq('book_id') && !rq('tea_id') && !rq('res_id'))
+      return err('tea_id or or tea_id or video_id or book_id is required');
 
     if (rq('video_id')){
       $video = video_ins()->find(rq('video_id'));
       if (!$video) return err('video is not exists');
       $data = $this->where('video_id',rq('video_id'))->with('user')->get();
-    }else{
+    }else if (rq('book_id')){
       $book = book_ins()->find(rq('book_id'));
       if (!$book) return err('book is not exists');
       $data = $this->where('book_id',rq('book_id'))->with('user')->get();
+    }else if (rq('tea_id')){
+      $tea = tea_ins()->find(rq('tea_id'));
+      if (!$tea) return err('tea is not exists');
+      $data = $this->where('tea_id',rq('tea_id'))->with('user')->get();
+    }else{
+      $res = res_ins()->find(rq('res_id'));
+      if (!$res) return err('res is not exists');
+      $data = $this->where('res_id',rq('res_id'))->with('user')->get();
     }
 
     if (!$data->first())

@@ -8,7 +8,8 @@
   angular.module('fdword',[
     'ui.router',
     'user',
-    'video'
+    'video',
+    'home',
   ])
     .config(['$interpolateProvider','$stateProvider','$urlRouterProvider',
       function($interpolateProvider,$stateProvider,$urlRouterProvider){

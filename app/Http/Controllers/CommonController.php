@@ -15,7 +15,12 @@ class CommonController extends Controller
    * 上传图片
    */
     public function image(){
-      $image = $_FILES['imgFile'];
+
+
+      $image = $_FILES['file'];
+
+
+
 
       // 需要填写你的 Access Key 和 Secret Key
       $accessKey = '-xpzbXEV0gDocV0_SsQFn-WYczH9kPQr27wtYQ_2';

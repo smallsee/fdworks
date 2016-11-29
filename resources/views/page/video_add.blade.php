@@ -97,8 +97,6 @@
   $('#VideoUploading').hide();
 
 
-
-
   var  video_url ='';
   KindEditor.ready(function(K){
     window.editor = K.create('#video_content',{
