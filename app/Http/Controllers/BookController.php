@@ -21,14 +21,13 @@ class BookController extends Controller
 
     $data = (object)array();
 
-    $book_data = book_ins()->where('tag','like','%'.rq('tag').'%')->skip(($little_page-1)*$take)->limit($take)->get();
-    $book_count = book_ins()->where('tag','like','%'.rq('tag').'%')->skip(($little_page-1)*$take)->limit($take)->count();
+    $book_data = book_ins()->where('tag','like','%'.rq('tag').'%')->orderBy('created_at','desc')->skip(($little_page-1)*$take)->limit($take)->get();
+    $book_count = book_ins()->where('tag','like','%'.rq('tag').'%')->count();
 
 
     $data->book = $book_data;
     $data->count = $book_count;
-//    $book_page = book_ins()->paginate(30);
-//    $data->book_page = $book_page;
+
     return ['status'=>1,'data'=>$data];
 
   }
