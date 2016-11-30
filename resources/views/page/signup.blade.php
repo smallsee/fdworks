@@ -2,20 +2,49 @@
   <div class="card">
     <h1>注册</h1>
     {{--[: User.signup_data :]--}}
-    <form name="signup_form" ng-submit="User.signup()">
+    <form name="signup_form" >
 
 
       <div class="input-group">
         <label>用户名:</label>
-        <input
-                name="username"
-                type="text"
-                ng-minlength="4"
-                ng-maxlength="24"
-                ng-model="User.signup_data.username"
-                ng-model-options="{debounce:500}"
-                required
-        >
+
+        <input type="radio" ng-model="phone_or_email" ng-value="1" >邮箱注册
+        <input type="radio" ng-model="phone_or_email" ng-value="0">手机注册
+        <div class="email" ng-if="phone_or_email==1">
+          <input
+                  name="username"
+                  type="text"
+                  ng-minlength="4"
+                  ng-maxlength="24"
+                  ng-model="User.signup_data.username"
+                  ng-model-options="{debounce:500}"
+                  placeholder="填写邮箱"
+                  required
+          >
+        </div>
+
+        <div class="phone" ng-if="phone_or_email==0">
+          <input
+                  name="username"
+                  type="text"
+                  ng-minlength="4"
+                  ng-maxlength="24"
+                  ng-model="User.signup_data.username"
+                  placeholder="填写手机号"
+                  ng-model-options="{debounce:500}"
+                  required
+          >
+          <input
+                  name="phone_code"
+                  type="text"
+                  ng-model="User.signup_data.phone_code"
+                  placeholder="手机验证码"
+                  required
+          >
+
+          <button ng-disabled="signup_form.username.$error.required" ng-click="User.sendSms()">发送短信</button>
+        </div>
+
 
         <div ng-if="signup_form.username.$touched" class="input-err-set">
           <div ng-if="signup_form.username.$error.required">用户名为必填项</div>
@@ -36,6 +65,7 @@
                 ng-minlength="6"
                 ng-maxlength="255"
                 ng-model="User.signup_data.password"
+                placeholder="填写密码"
                 required
         >
         <div ng-if="signup_form.password.$touched" class="input-err-set">
@@ -55,6 +85,7 @@
                 ng-model="User.signup_data.validateCode"
                 ng-model-options="{debounce:500}"
                 required
+                placeholder="验证码"
         >
         <img src="{{asset('api/validateCode')}}" alt="1" onclick="$(this).attr('src',$(this).attr('src')+'?'+Math.random())">
         <div ng-if="signup_form.validateCode.$touched" class="input-err-set">
@@ -62,6 +93,8 @@
           <div ng-if="User.signup_validateCode_right">验证码错误</div>
         </div>
       </div>
+
+
 
       <div class="hr"></div>
       <div class="improve-info">是否完善信息</div>
@@ -104,7 +137,7 @@
       </div>
 
       <button class="primary" type="submit"
-              ng-disabled="signup_form.$invalid">注册</button>
+              ng-disabled="signup_form.$invalid" ng-click="User.signup()">注册</button>
     </form>
   </div>
 </div>

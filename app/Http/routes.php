@@ -181,4 +181,9 @@ Route::group(['middleware' => ['web']], function () {
    * home显示数据
    */
   Route::any('data/home/data','HomeController@data');
+  /**
+   * 本子页显示数据
+   */
+  Route::any('data/book/data','BookController@data');
+
 });

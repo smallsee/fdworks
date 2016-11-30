@@ -20,15 +20,52 @@
   <script src="{{asset('/node_modules/angular/angular.js')}}"></script>
   <script src="{{asset('/node_modules/angular-file-upload/dist/angular-file-upload.js')}}"></script>
   <script src="{{asset('/node_modules/angular-ui-router/release/angular-ui-router.js')}}"></script>
-  <script src="{{ asset('/node_modules/kindeditor/kindeditor.js') }}"></script>
-  <script src="{{ asset('/node_modules/layer/layer.js') }}"></script>
-  <script src="{{ asset('/node_modules/layer/dialog.js') }}"></script>
+  <script src="{{asset('/node_modules/kindeditor/kindeditor.js') }}"></script>
+  <script src="{{asset('/node_modules/layer/layer.js') }}"></script>
+  <script src="{{asset('/node_modules/layer/dialog.js') }}"></script>
   <script src="{{asset('/js/base.js')}}"></script>
   <script src="{{asset('/js/user.js')}}"></script>
   <script src="{{asset('/js/video.js')}}"></script>
   <script src="{{asset('/js/home.js')}}"></script>
+  <script src="{{asset('/js/book.js')}}"></script>
 </head>
 <body>
+{{--登录--}}
+{{--<div class="login-mask">--}}
+  {{--<div class="login-box">--}}
+    {{--<div class="login-box-head">--}}
+      {{--<div class="login-text">登录</div>--}}
+      {{--<div class="login-close">X</div>--}}
+    {{--</div>--}}
+
+    {{--<div class="login-box-body">--}}
+      {{--<div class="left-body">--}}
+        {{--<form name="login_form" ng-submit="User.login()">--}}
+          {{--<div class="input-group">--}}
+            {{--<label class="iconfont icon-user"></label>--}}
+            {{--<input name="username" type="text" ng-model="User.login_data.username" required>--}}
+          {{--</div>--}}
+
+          {{--<div class="input-group">--}}
+            {{--<label class="iconfont icon-key1" ></label>--}}
+            {{--<input name="password" type="password" ng-model="User.login_data.password" required>--}}
+          {{--</div>--}}
+
+          {{--<div ng-if="User.login_failed" class="input-err-set">--}}
+            {{--用户名或密码有误--}}
+          {{--</div>--}}
+          {{--<div class="input-group">--}}
+            {{--<button type="submit" class="primary"--}}
+                    {{--ng-disabled="login_form.username.$error.required ||--}}
+                      {{--login_form.password.$error.required"--}}
+            {{-->登录</button>--}}
+          {{--</div>--}}
+        {{--</form>--}}
+      {{--</div>--}}
+      {{--<div class="right-body"></div>--}}
+    {{--</div>--}}
+  {{--</div>--}}
+{{--</div>--}}
 {{--头部--}}
 <header class="header animated bounce">
   <div class="container clearfix">
@@ -69,6 +106,8 @@
 
   </div>
 </div>
+
+
 
   <div class="page" ng-controller="CommonController">
     <div ui-view></div>

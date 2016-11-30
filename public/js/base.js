@@ -10,6 +10,7 @@
     'user',
     'video',
     'home',
+    'book'
   ])
     .config(['$interpolateProvider','$stateProvider','$urlRouterProvider',
       function($interpolateProvider,$stateProvider,$urlRouterProvider){

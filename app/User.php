@@ -75,19 +75,10 @@ class User extends Authenticatable
           return err('send email is fail');
       }
       if ($phone){ //手机注册
-        $code = '';
-        $charset = '1234567890';
-        $_len = strlen($charset) - 1;
-        for ($i = 0;$i < 6;++$i) {
-          $code .= $charset[mt_rand(0, $_len)];
-        }
-        $sms = new Sms(array('api_key' => '99ebc75be305718b0e66c5a37ce6f1fc' , 'use_ssl' => FALSE ));
-        $res = $sms->send( $phone, '验证码:'.$code.'【动漫说】');
 
-        if (isset( $res['error'] ) &&  $res['error'] == 0)
-          session()->put('phone_code',$code);
-        else
-          return err($res['error']);
+
+        if (session('phone_code') != rq('phone_code'))
+          return err('phone_code not right');
 
       }
 
@@ -162,5 +153,23 @@ class User extends Authenticatable
       return err('validate_code not right');
 
     return success();
+  }
+
+  //手机发送验证码
+  public function sendSms(){
+    $phone = rq('username');
+    $code = '';
+    $charset = '1234567890';
+    $_len = strlen($charset) - 1;
+    for ($i = 0;$i < 6;++$i) {
+      $code .= $charset[mt_rand(0, $_len)];
+    }
+    $sms = new Sms(array('api_key' => '99ebc75be305718b0e66c5a37ce6f1fc' , 'use_ssl' => FALSE ));
+    $res = $sms->send( $phone, '验证码:'.$code.'【动漫说】');
+
+    if (isset( $res['error'] ) &&  $res['error'] == 0)
+      session()->put('phone_code',$code);
+    else
+      return err($res['error']);
   }
 }

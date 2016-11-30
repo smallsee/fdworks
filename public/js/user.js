@@ -11,6 +11,9 @@
         me.login_data = {};
         me.data = {};
 
+        me.sendSms = function(){
+          console.log('s');
+        };
         me.read = function(param){
           return $http.post('api/user/read',param)
             .then(function(r){
@@ -99,7 +102,7 @@
       'UserService',
       function($scope,UserService){
         $scope.User = UserService;
-
+        $scope.phone_or_email = 1 ;
         $('#btnCrop').click(function(){
           var avatar_url = $('.username_avatar').attr('src');
           UserService.signup_data.avatar = avatar_url;
