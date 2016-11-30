@@ -3,6 +3,19 @@
 
   'use strict';
   angular.module('book',[])
+    .directive('repeatFinish',function(){
+      return {
+        link: function(scope,element,attr){
+          // console.log(scope.$index);
+          if(scope.$last == true){
+            waterfall();
+            setTimeout(function(){
+              waterfall();
+            },600)
+          }
+        }
+      }
+    })
     .service('BookService',[
       '$state',
       '$http',
@@ -24,14 +37,12 @@
           $http.post('data/book/data',conf)
             .then(function(r){
               if (r.data.status){
-
                 //获取数据的条数
                 if (me.get_count){
                   me.count = r.data.data.count;
                   me.get_count =false;
                   me.makePage();
                 }
-
                 if (r.data.data.book.length){
                   me.book_data =me.book_data.concat(r.data.data.book);
                   me.little_page++;
@@ -40,23 +51,26 @@
                 }
 
               }else{
-                console.log(r);
+                return ;
               }
             })
             .finally(function(){
               me.pending = false;
 
+              var $lastBox = $('#book-mainBox .book-box').last();
+              var lastBoxDis = $lastBox.offset().top+Math.floor($lastBox.outerHeight()/2);
+              $('#book-mainBox').height(lastBoxDis + 20) ;
             })
         };
         me.makePage = function(){
           //显示宽数
-          me.page_list = Math.ceil(me.count/15);
+          me.page_list = Math.ceil(me.count/30);
           me.page_item = {};
           for (var i=0;i<me.page_list;i++){
             me.page_item[i] = 1;
           }
-
           console.log(me.page_item)
+
         };
 
         me.changPage = function(page){
@@ -64,9 +78,14 @@
           me.book_data = [];
           me.page=page;
           me.little_page = (page-1)*3+1;
-          console.log(page);
-          console.log(me.little_page);
           me.get();
+
+          setTimeout(function(){
+            waterfall();
+            var $lastBox = $('#book-mainBox .book-box').last();
+            var lastBoxDis = $lastBox.offset().top+Math.floor($lastBox.outerHeight()/2);
+            $('#book-mainBox').height(lastBoxDis + 20) ;
+          },600);
         };
 
         me.changTag = function(tag){
@@ -77,6 +96,13 @@
           me.tag=tag;
           me.little_page = 1;
           me.get();
+
+          setTimeout(function(){
+            waterfall();
+            var $lastBox = $('#book-mainBox .book-box').last();
+            var lastBoxDis = $lastBox.offset().top+Math.floor($lastBox.outerHeight()/2);
+            $('#book-mainBox').height(lastBoxDis + 20) ;
+          },600);
         }
 
 
@@ -90,9 +116,7 @@
         var $win;
         $scope.Book = BookService;
         BookService.get();
-
         //类型
-
         $scope.tags = [
           {
             tag:'',
@@ -115,14 +139,52 @@
         //页面滚动时加载数据
         $win = $(window);
         $win.on('scroll',function(){
+
           $win.scrollTop();
           if ($win.scrollTop() - ($(document).height()-$win.height()) > -30){
             BookService.get();
           }
 
         });
+
+        // $scope.$watch(function(){
+        //   return BookService.book_data;
+        // },function(n,o){
+        //   waterfall();
+        // },true);
       }
     ])
 
 
 })();
+setTimeout(function(){
+  waterfall();
+},600);
+
+function waterfall(){
+  var main = $('#book-mainBox');
+  var $boxs = $('#book-mainBox .book-box');
+  var w = $boxs.eq(0).outerWidth();
+  var cols = Math.floor(main.width()/w);
+  main.width(w*cols+16)
+  var hArr = [];
+  $boxs.each(function(index,value){
+    var h = $boxs.eq(index).outerHeight();
+    if (index < cols){
+      hArr[index] = h;
+    }else{
+      var minH = Math.min.apply(null,hArr);
+      var minHIndex = $.inArray(minH,hArr);
+      $(value).css({
+        position:'absolute',
+
+      }).animate({
+        top:minH,
+        left:minHIndex*w,
+        opacity:1,
+      },600);
+      hArr[minHIndex]+=$boxs.eq(index).outerHeight();
+
+    }
+  });
+}

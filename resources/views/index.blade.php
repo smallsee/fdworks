@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="{{asset('/css/common.css')}}">
   <link rel="stylesheet" href="{{asset('/css/animate.min.css')}}">
   <link rel="stylesheet" href="{{asset('/css/base.css')}}">
+  <link rel="stylesheet" href="{{asset('/css/book.css')}}">
 
   <script src="{{asset('/node_modules/jquery/dist/jquery.js')}}"></script>
   <script src="{{asset('/node_modules/cropbox.js')}}"></script>

@@ -12,16 +12,16 @@ class BookController extends Controller
    */
   public function data(){
     $little_page = rq('little_page') ?: 1;
-    $take = rq('limit') ?: 5;
+    $take = rq('limit') ?: 10;
     $page = rq('page') ?: 1;
     $tag = rq('tag');
-    $maxtake = 15 * $page;
+    $maxtake = 30 * $page;
     if ($little_page * $take > $maxtake)
       return err(['pagedata is done']);
 
     $data = (object)array();
 
-    $book_data = book_ins()->where('tag','like','%'.rq('tag').'%')->orderBy('created_at','desc')->skip(($little_page-1)*$take)->limit($take)->get();
+    $book_data = book_ins()->with('user')->where('tag','like','%'.rq('tag').'%')->orderBy('created_at','desc')->skip(($little_page-1)*$take)->limit($take)->get();
     $book_count = book_ins()->where('tag','like','%'.rq('tag').'%')->count();
 
 
