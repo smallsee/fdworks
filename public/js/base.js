@@ -8,9 +8,10 @@
   angular.module('fdword',[
     'ui.router',
     'user',
-    'video',
+    'videoAdd',
     'home',
-    'book'
+    'book',
+    'bookAdd'
   ])
     .config(['$interpolateProvider','$stateProvider','$urlRouterProvider',
       function($interpolateProvider,$stateProvider,$urlRouterProvider){
@@ -48,8 +49,8 @@
             templateUrl:'tpl/page/book'
           })
 
-          .state('book.add',{
-            url:'/add/:id',
+          .state('book/add',{
+            url:'/book/add/:id',
             templateUrl:'tpl/page/book/add'
           })
 

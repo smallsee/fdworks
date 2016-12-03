@@ -6,7 +6,7 @@
 
     <div class="book-box box-clone clearfix">
       <div class="book-pic clearfix" style="width: 232px; opacity: 1">
-        <a href="#"><div class="book-newPost">发新帖</div></a>
+        <a ui-sref="book/add"><div class="book-newPost">发新帖</div></a>
         <div class="book-category clearfix">
           <div>分类:</div>
           <div ng-repeat="tag in tags track by $index"
@@ -39,11 +39,11 @@
     <div ng-repeat="item in Book.book_data track by $index" class="book-box" repeat-finish>
 
       <div class="book-pic">
-        <img ng-src="[: item.thumb :]" alt="">
-        <div class="book-title" ng-bind="item.title"></div>
+        <a ui-sref="book/add({id:item.id})"><img ng-src="[: item.thumb :]" alt="">
+        <div class="book-title" ng-bind="item.title"></div></a>
         <div class="book-content" ng-bind="item.content"></div>
         <div class="book-icon clearfix">
-          <div class="icon-eye-open">查看</div>
+          <div class="icon-eye-open">查看:[: item.see? item.see : 0 :] </div>
           <div class="icon-comments-alt">评论</div>
         </div>
         <div class="book-username">
@@ -78,9 +78,4 @@
     {{--</div>--}}
 </div>
 
-
-
-
-<a ui-sref="book.add">本子添加</a>
-
-<div ui-view></div>
+{{--<div ui-view></div>--}}

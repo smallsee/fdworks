@@ -8,6 +8,7 @@
   <title>Document</title>
   <link rel="stylesheet" href="{{asset('/node_modules/normalize-css/normalize.css')}}">
   <link rel="stylesheet" href="{{asset('/node_modules/uploadify/uploadify.css')}}">
+  <link rel="stylesheet" href="{{asset('/node_modules/zyupload-1.0.0.css') }}">
   <link rel="stylesheet" href="{{asset('/css/avatar.css')}}">
   <link rel="stylesheet" href="{{asset('/css/iconfont.css')}}">
   <link rel="stylesheet" href="{{asset('/css/common.css')}}">
@@ -24,11 +25,14 @@
   <script src="{{asset('/node_modules/kindeditor/kindeditor.js') }}"></script>
   <script src="{{asset('/node_modules/layer/layer.js') }}"></script>
   <script src="{{asset('/node_modules/layer/dialog.js') }}"></script>
+  <script src="{{asset('/node_modules/zyupload.js') }}"></script>
   <script src="{{asset('/js/base.js')}}"></script>
   <script src="{{asset('/js/user.js')}}"></script>
   <script src="{{asset('/js/video.js')}}"></script>
   <script src="{{asset('/js/home.js')}}"></script>
   <script src="{{asset('/js/book.js')}}"></script>
+  <script src="{{asset('/js/book_add.js')}}"></script>
+  <script src="{{asset('/js/video_add.js')}}"></script>
 </head>
 <body>
 {{--登录--}}

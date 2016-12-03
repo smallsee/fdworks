@@ -1,5 +1,5 @@
 #book-mainBox{
-  width:1300px;
+  width:1260px;
   position: relative;
   margin: 0 auto;
   border: 4px solid #f2f2f2;
@@ -35,6 +35,8 @@
 #book-mainBox .book-box{
   padding: 15px 0 0 15px;
   float: left;
+
+  opacity: 0;
 }
 #book-mainBox .book-category{
   width: 210px;
@@ -115,8 +117,14 @@
 }
 #book-mainBox .book-box .book-username div{
   color: #87BE25;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  overflow:hidden;
 }
 #book-mainBox .book-pic .active{
   background-color:#87BE25;
   color:white
+}
+#preview{
+  width: 750px;
 }
